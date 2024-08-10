@@ -2,7 +2,7 @@
 <addon id="plugin.video.eneyida"
 version="1.0.0"
 name="Eneyida"
-provider-name="Roman_V_M">
+provider-name="CakesTwix">
 <requires>
   <import addon="xbmc.python" version="3.0.1"/>
   <import addon="script.module.requests" version="2.22.0"/>
@@ -12,15 +12,15 @@ provider-name="Roman_V_M">
   <provides>video</provides>
 </extension>
 <extension point="xbmc.addon.metadata">
-  <summary lang="en_GB">Eneyida.tv Kodi Video Plugin</summary>
-  <description lang="en_GB">An example video plugin for Kodi mediacenter.</description>
-  <disclaimer lang="en_GB">Public domain movies are provided by publicdomainmovie.net.</disclaimer>
+  <summary>Eneyida.tv</summary>
+  <description>Мета проекту «Енеїда» - популяризація української мови, демонстрація її різнобарвності та сучасності. Ми плануємо робити це через ретрансляцію якісного кіно, мультфільмів, телесеріалів та різноманітних телешоу в якісному українському перекладі. Тож, у добрий шлях дорогі конфіденти!.</description>
+  <disclaimer>Я тільки пробую писати аддони під Kodi, можуть бути помилки чи щось таке.</disclaimer>
   <license>GPL-3.0-only	</license>
   <assets>
     <icon>resources/images/logo.jpg</icon>
     <fanart>resources/images/screenshot-1.png</fanart>
     <screenshot>resources/images/screenshot-1.png</screenshot>
   </assets>
-  <news>Updated with latest artwork metadata</news>
+  <news>Перший реліз.</news>
 </extension>
 </addon>
