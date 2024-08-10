@@ -8,22 +8,28 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Головна', link: '/' },
+      { text: 'Аддони', link: '/addons/plugin.video.eneyida' }
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Аддони',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'plugin.video.eneyida', link: '/addons/plugin.video.eneyida' },
+        ]
+      },
+      {
+        text: 'Налаштування',
+        items: [
+          { text: 'Встановлення через репозиторий', link: '/install/repo' },
+          { text: 'Встановлення напряму', link: '/install/addon' },
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/CakesTwix/repository.ukrainian' }
     ]
   }
 })

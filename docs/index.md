@@ -3,23 +3,23 @@
 layout: home
 
 hero:
-  name: "Ukrainian Kodi"
-  text: "Awesome ukrainian addons for Kodi"
-  tagline: My great project tagline
+  name: "Українські аддони для Kodi"
+  text: "Чудові(ні) українські аддони для Kodi"
+  tagline: У Розробці!
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Як встановити через репозиторий
+      link: /install/repo
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Як встановити аддон напряму
+      link: /install/addon
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Підтрімує безліч(ні) сайтів
+    details: Дивиться аніме, фільми, серіали!
+  - title: Відкритий!
+    details: Код є відкритим та під ліцензією GPLv3
+  - title: Прекрасна документація
+    details: Не розумієте як встановити? Ану читати документацію!
 ---
 
