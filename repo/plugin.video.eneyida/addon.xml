@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="plugin.video.eneyida"
-version="1.0.0"
+version="1.1.0"
 name="Eneyida"
 provider-name="CakesTwix">
 <requires>
@@ -21,6 +21,6 @@ provider-name="CakesTwix">
     <fanart>resources/images/screenshot-1.png</fanart>
     <screenshot>resources/images/screenshot-1.png</screenshot>
   </assets>
-  <news>Перший реліз.</news>
+  <news>1.1.0 | Зробив нормальну структуру коду.</news>
 </extension>
 </addon>
