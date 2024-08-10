@@ -2,9 +2,9 @@
 <addon id="repository.ukrainian" name="Українські піратські сайти" version="1.0" provider-name="CakesTwix">
     <extension point="xbmc.addon.repository" name="CakesTwix's Repository">
         <dir>
-            <info compressed="false">https://raw.githubusercontent.com/CakesTwix/repository.ukrainian/pages/repo/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/CakesTwix/repository.ukrainian/pages/repo/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/CakesTwix/repository.ukrainian/pages/repo/zips/</datadir>
+            <info compressed="false">https://cakestwix.github.io/repository.ukrainian/zips/addons.xml</info>
+            <checksum>https://cakestwix.github.io/repository.ukrainian/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://cakestwix.github.io/repository.ukrainian/zips/</datadir>
         </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
