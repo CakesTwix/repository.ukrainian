@@ -17,6 +17,7 @@ export default defineConfig({
         text: 'Аддони',
         items: [
           { text: 'plugin.video.eneyida', link: '/addons/plugin.video.eneyida' },
+          { text: 'plugin.video.unimay', link: '/addons/plugin.video.unimay' },
         ]
       },
       {

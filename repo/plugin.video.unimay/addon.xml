@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.video.unimay"
+version="1.0.0"
+name="Unimay"
+provider-name="CakesTwix">
+<requires>
+  <import addon="xbmc.python" version="3.0.1"/>
+  <import addon="script.module.requests" version="2.22.0"/>
+  <import addon="script.module.beautifulsoup4" version="4.6.2"/>
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.addon.metadata">
+  <summary>Unimay.media</summary>
+  <description>Вас вітає Unimay Media!. Unimay Media є однією з провідних команд, що спеціалізується на локалізації та озвученні аніме для україномовної аудиторії.</description>
+  <disclaimer>Я тільки пробую писати аддони під Kodi, можуть бути помилки чи щось таке.</disclaimer>
+  <license>GPL-3.0-only	</license>
+  <assets>
+    <icon>resources/images/logo.png</icon>
+    <fanart>resources/images/fanart.png</fanart>
+    <screenshot>resources/images/scr.png</screenshot>
+    <screenshot>resources/images/scr2.png</screenshot>
+  </assets>
+  <news>1.0.0 | Перший реліз.</news>
+</extension>
+</addon>
