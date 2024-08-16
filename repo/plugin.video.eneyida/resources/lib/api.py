@@ -4,12 +4,14 @@ import xbmcplugin
 from bs4 import BeautifulSoup
 import json
 import sys
+from urllib.parse import unquote
 
 from resources.lib.constant import title_type
 from resources.lib.utils import get_url, get_videos
 
 # Get a plugin handle as an integer number.
 HANDLE = int(sys.argv[1])
+
 
 def list_videos(genre_index):
     """
@@ -65,18 +67,17 @@ def list_videos(genre_index):
         list_item.setProperty("IsPlayable", "false")
         # Create a URL for a plugin recursive call.
         # Example: plugin://plugin.video.example/?action=play&video=https%3A%2F%2Fia600702.us.archive.org%2F3%2Fitems%2Firon_mask%2Firon_mask_512kb.mp4
-        url = get_url(
-            action="episodes", video=item.find("a", class_="short_title")["href"]
-        )
+        url = get_url(action="dubs", video=item.find("a", class_="short_title")["href"])
         # Add the list item to a virtual Kodi folder.
         # is_folder = False means that this item won't open any sub-list.
         is_folder = True
         # Add our item to the Kodi virtual folder listing.
         xbmcplugin.addDirectoryItem(HANDLE, url, list_item, is_folder)
     # Add sort methods for the virtual folder items
-    xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
+    xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_NONE)
     # Finish creating a virtual folder.
     xbmcplugin.endOfDirectory(HANDLE)
+
 
 def list_genres():
     """
@@ -112,12 +113,12 @@ def list_genres():
         xbmcplugin.addDirectoryItem(HANDLE, url, list_item, is_folder)
 
     # Add sort methods for the virtual folder items
-    xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
+    xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_NONE)
     # Finish creating a virtual folder.
     xbmcplugin.endOfDirectory(HANDLE)
 
 
-def list_episodes(title_url: str):
+def list_dubs(title_url: str):
     """
     Create the list of playable episode in the Kodi interface.
 
@@ -134,7 +135,7 @@ def list_episodes(title_url: str):
     # Set plugin content. It allows Kodi to select appropriate views
     # for this type of content.
     xbmcplugin.setContent(HANDLE, "movie")
-    list_item = xbmcgui.ListItem(label="Епізоди")
+    list_item = xbmcgui.ListItem()
     # Get the list of videos in the category.
 
     plr = requests.get(soup.find("div", class_="video_box").find("iframe")["src"])
@@ -163,40 +164,61 @@ def list_episodes(title_url: str):
         # Add our item to the Kodi virtual folder listing.
         xbmcplugin.addDirectoryItem(HANDLE, url, list_item, is_folder)
     else:
-        # Iterate through videos.
-        for dub in json.loads(
+        dubs = json.loads(
             plr_soup.body.find("script").text.split("file: '")[1].split("',")[0]
-        ):  # Dubs, Season, Episode
+        )
+
+        # Iterate through videos.
+        for dub in dubs:  # Dubs, Season, Episode
             # Create a list item with a text label
-            for season in dub["folder"]:
-                for episode in season["folder"]:
-                    info_tag = list_item.getVideoInfoTag()
-                    # Set graphics (thumbnail, fanart, banner, poster, landscape etc.) for the list item.
-                    # Here we use only poster for simplicity's sake.
-                    # In a real-life plugin you may need to set multiple image types.
-                    list_item.setArt({"poster": episode["poster"]})
-                    # Set additional info for the list item via InfoTag.
-                    # 'mediatype' is needed for skin to display info for this ListItem correctly.
-                    info_tag = list_item.getVideoInfoTag()
-                    info_tag.setMediaType("episodes")
-                    info_tag.setTitle(
-                        f"{dub['title']} {season['title']} {episode['title']}"
-                    )
-                    # Set 'IsPlayable' property to 'true'.
-                    # This is mandatory for playable items!
-                    list_item.setProperty("IsPlayable", "true")
-                    # Create a URL for a plugin recursive call.
-                    # Example: plugin://plugin.video.example/?action=play&video=https%3A%2F%2Fia600702.us.archive.org%2F3%2Fitems%2Firon_mask%2Firon_mask_512kb.mp4
-                    url = get_url(action="play", video=episode["file"])
-                    # Add the list item to a virtual Kodi folder.
-                    # is_folder = False means that this item won't open any sub-list.
-                    is_folder = False
-                    # Add our item to the Kodi virtual folder listing.
-                    xbmcplugin.addDirectoryItem(HANDLE, url, list_item, is_folder)
+            list_item = xbmcgui.ListItem(label=dub["title"])
+            xbmcplugin.setContent(HANDLE, "movie")
+            xbmcplugin.setPluginCategory(HANDLE, "Озвучення")
+            xbmcplugin.addDirectoryItem(
+                HANDLE,
+                get_url(action="open_seasons", seasons_folder=dub["folder"]),
+                list_item,
+                True,
+            )
 
     # Add sort methods for the virtual folder items
-    xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_LABEL_IGNORE_THE)
+    xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_NONE)
     # Finish creating a virtual folder.
+    xbmcplugin.endOfDirectory(HANDLE)
+
+
+def open_seasons(seasons_folder):
+    seasons = json.loads(unquote(seasons_folder).replace("'", '"'))
+    if len(seasons) == 1:
+        open_episodes(seasons[0]["folder"])
+        return
+
+    for season in json.loads(unquote(seasons_folder).replace("'", '"')):
+        list_season = xbmcgui.ListItem(label=season["title"])
+        xbmcplugin.setContent(HANDLE, "seasons")
+        xbmcplugin.setPluginCategory(HANDLE, "Сезони")
+        xbmcplugin.addDirectoryItem(
+            HANDLE,
+            get_url(action="open_episodes", episodes_folder=season["folder"]),
+            list_season,
+            True,
+        )
+        xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_NONE)
+
+    xbmcplugin.endOfDirectory(HANDLE)
+
+
+def open_episodes(episodes_folder):
+    for episode in json.loads(unquote(episodes_folder).replace("'", '"')):
+        list_episode = xbmcgui.ListItem(label=episode["title"])
+        list_episode.setArt({"poster": episode["poster"]})
+        xbmcplugin.setContent(HANDLE, "episodes")
+        xbmcplugin.setPluginCategory(HANDLE, "Епизоди")
+        xbmcplugin.addDirectoryItem(
+            HANDLE, get_url(action="play", video=episode["file"]), list_episode, False
+        )
+        xbmcplugin.addSortMethod(HANDLE, xbmcplugin.SORT_METHOD_NONE)
+
     xbmcplugin.endOfDirectory(HANDLE)
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon id="plugin.video.eneyida"
-version="1.1.0"
+version="1.2.0"
 name="Eneyida"
 provider-name="CakesTwix">
 <requires>
@@ -17,10 +17,10 @@ provider-name="CakesTwix">
   <disclaimer>Я тільки пробую писати аддони під Kodi, можуть бути помилки чи щось таке.</disclaimer>
   <license>GPL-3.0-only	</license>
   <assets>
-    <icon>resources/images/logo.jpg</icon>
-    <fanart>resources/images/screenshot-1.png</fanart>
+    <icon>resources/images/icon.png</icon>
+    <fanart>resources/images/fanart.png</fanart>
     <screenshot>resources/images/screenshot-1.png</screenshot>
   </assets>
-  <news>1.1.0 | Зробив нормальну структуру коду.</news>
+  <news>1.2.0 | Додав субдиректорії Озвучення - Сезони - Епизоди. Оновив іконку та фанарт</news>
 </extension>
 </addon>

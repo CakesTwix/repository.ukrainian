@@ -1,5 +1,13 @@
 from urllib.parse import parse_qsl
-from resources.lib.api import list_genres, list_videos, list_episodes, play_video
+from resources.lib.api import (
+    list_genres,
+    list_videos,
+    list_dubs,
+    play_video,
+    open_seasons,
+    open_episodes,
+)
+
 
 def router(paramstring):
     """
@@ -20,9 +28,15 @@ def router(paramstring):
     elif params["action"] == "listing":
         # Display the list of videos in a provided category.
         list_videos(int(params["genre_index"]))
-    elif params["action"] == "episodes":
+    elif params["action"] == "dubs":
         # Play a video from a provided URL.
-        list_episodes(params["video"])
+        list_dubs(params["video"])
+    elif params["action"] == "open_seasons":
+        # Play a video from a provided URL.
+        open_seasons(params["seasons_folder"])
+    elif params["action"] == "open_episodes":
+        # Play a video from a provided URL.
+        open_episodes(params["episodes_folder"])
     elif params["action"] == "play":
         # Play a video from a provided URL.
         play_video(params["video"])

@@ -2,6 +2,7 @@ from urllib.parse import urlencode
 import sys
 from resources.lib.constant import title_type
 
+
 def get_url(**kwargs):
     """
     Create a URL for calling the plugin recursively from the given set of keyword arguments.
@@ -11,6 +12,7 @@ def get_url(**kwargs):
     :rtype: str
     """
     return "{}?{}".format(sys.argv[0], urlencode(kwargs))
+
 
 def get_videos(genre_index):
     """
