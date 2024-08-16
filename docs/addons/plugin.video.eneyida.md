@@ -1,4 +1,4 @@
-# plugin.video.eneyida <Badge type="info" text="1.1.0" />
+# plugin.video.eneyida <Badge type="info" text="1.2.0" />
 
 ## Про це
 
@@ -16,7 +16,7 @@
 
 ## Завантажити
 
-- ### [plugin.video.eneyida](/zips/plugin.video.eneyida/plugin.video.eneyida-1.1.0.zip) <Badge type="info" text="1.1.0" />
+- ### [plugin.video.eneyida](/zips/plugin.video.eneyida/plugin.video.eneyida-1.2.0.zip) <Badge type="info" text="1.2.0" />
 
 ## Встановлення
 
