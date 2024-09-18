@@ -7,6 +7,7 @@ from xbmcvfs import translatePath
 ADDON_PATH = translatePath(Addon().getAddonInfo("path"))
 ICONS_DIR = os.path.join(ADDON_PATH, "resources", "images", "icons")
 FANART_DIR = os.path.join(ADDON_PATH, "resources", "images", "fanart")
+addon = Addon()
 URL = f"https://{addon.getSetting('main_url')}"
 MIRROR = f"https://{addon.getSetting('mirror')}"
 
