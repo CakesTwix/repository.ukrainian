@@ -1,4 +1,5 @@
 import os
+import requests
 from xbmcaddon import Addon
 from xbmcvfs import translatePath
 
@@ -6,47 +7,51 @@ from xbmcvfs import translatePath
 ADDON_PATH = translatePath(Addon().getAddonInfo("path"))
 ICONS_DIR = os.path.join(ADDON_PATH, "resources", "images", "icons")
 FANART_DIR = os.path.join(ADDON_PATH, "resources", "images", "fanart")
+URL = f"https://{addon.getSetting('main_url')}"
+MIRROR = f"https://{addon.getSetting('mirror')}"
+
+url = URL if requests.get(URL).status_code else MIRROR
 
 title_type = [
     {
         "genre": "Фільми",
         "content": "movies",
-        "url": "https://eneyida.tv/films/",
+        "url": f"{url}/films/",
         "icon": os.path.join(ICONS_DIR, "Movies.png"),
         "fanart": os.path.join(FANART_DIR, "Movies.png"),
     },
     {
         "genre": "Серіали",
         "content": "tvshows",
-        "url": "https://eneyida.tv/series/",
+        "url": f"{url}/series/",
         "icon": os.path.join(ICONS_DIR, "Shows.png"),
         "fanart": os.path.join(FANART_DIR, "Shows.png"),
     },
     {
         "genre": "Мультфільми",
         "content": "movies",
-        "url": "https://eneyida.tv/cartoon/",
+        "url": f"{url}/cartoon/",
         "icon": os.path.join(ICONS_DIR, "CartoonMovies.png"),
         "fanart": os.path.join(FANART_DIR, "CartoonMovies.png"),
     },
     {
         "genre": "Мультсеріали",
         "content": "tvshows",
-        "url": "https://eneyida.tv/cartoon-series/",
+        "url": f"{url}/cartoon-series/",
         "icon": os.path.join(ICONS_DIR, "Cartoon.png"),
         "fanart": os.path.join(FANART_DIR, "Cartoon.png"),
     },
     {
         "genre": "Аніме",
         "content": "tvshows",
-        "url": "https://eneyida.tv/anime/",
+        "url": f"{url}/anime/",
         "icon": os.path.join(ICONS_DIR, "Anime.png"),
         "fanart": os.path.join(FANART_DIR, "Anime.png"),
     },
     {
         "genre": "Пошук",
         "content": "tvshows",
-        "url": "https://eneyida.tv/index.php?do=search",
+        "url": f"{url}/index.php?do=search",
         "icon": os.path.join(ICONS_DIR, "Unknown.png"),
         "fanart": os.path.join(FANART_DIR, "Movies.png"),
     },
