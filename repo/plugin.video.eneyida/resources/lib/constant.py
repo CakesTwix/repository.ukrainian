@@ -10,48 +10,48 @@ FANART_DIR = os.path.join(ADDON_PATH, "resources", "images", "fanart")
 URL = f"https://{addon.getSetting('main_url')}"
 MIRROR = f"https://{addon.getSetting('mirror')}"
 
-url = URL if requests.get(URL).status_code else MIRROR
+main_url = URL if requests.get(URL).status_code else MIRROR
 
 title_type = [
     {
         "genre": "Фільми",
         "content": "movies",
-        "url": f"{url}/films/",
+        "url": f"{main_url}/films/",
         "icon": os.path.join(ICONS_DIR, "Movies.png"),
         "fanart": os.path.join(FANART_DIR, "Movies.png"),
     },
     {
         "genre": "Серіали",
         "content": "tvshows",
-        "url": f"{url}/series/",
+        "url": f"{main_url}/series/",
         "icon": os.path.join(ICONS_DIR, "Shows.png"),
         "fanart": os.path.join(FANART_DIR, "Shows.png"),
     },
     {
         "genre": "Мультфільми",
         "content": "movies",
-        "url": f"{url}/cartoon/",
+        "url": f"{main_url}/cartoon/",
         "icon": os.path.join(ICONS_DIR, "CartoonMovies.png"),
         "fanart": os.path.join(FANART_DIR, "CartoonMovies.png"),
     },
     {
         "genre": "Мультсеріали",
         "content": "tvshows",
-        "url": f"{url}/cartoon-series/",
+        "url": f"{main_url}/cartoon-series/",
         "icon": os.path.join(ICONS_DIR, "Cartoon.png"),
         "fanart": os.path.join(FANART_DIR, "Cartoon.png"),
     },
     {
         "genre": "Аніме",
         "content": "tvshows",
-        "url": f"{url}/anime/",
+        "url": f"{main_url}/anime/",
         "icon": os.path.join(ICONS_DIR, "Anime.png"),
         "fanart": os.path.join(FANART_DIR, "Anime.png"),
     },
     {
         "genre": "Пошук",
         "content": "tvshows",
-        "url": f"{url}/index.php?do=search",
+        "url": f"{main_url}/index.php?do=search",
         "icon": os.path.join(ICONS_DIR, "Unknown.png"),
         "fanart": os.path.join(FANART_DIR, "Movies.png"),
     },
