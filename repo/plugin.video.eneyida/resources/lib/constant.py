@@ -11,7 +11,7 @@ FANART_DIR = os.path.join(ADDON_PATH, "resources", "images", "fanart")
 URL = f"https://{addon.getSetting('main_url')}"
 MIRROR = f"https://{addon.getSetting('mirror')}"
 
-main_url = URL if requests.get(URL).status_code else MIRROR
+main_url = URL if requests.get(URL).status_code == 200 else MIRROR
 
 title_type = [
     {
