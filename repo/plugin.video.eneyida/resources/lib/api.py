@@ -27,7 +27,7 @@ def list_videos(genre_index):
 
         if keyb.isConfirmed() and len(keyb.getText()) > 0:
             r = requests.post(
-                f"{url}/index.php?do=search",
+                f"{main_url}/index.php?do=search",
                 data={
                     "do": "search",
                     "subaction": "search",
@@ -55,7 +55,7 @@ def list_videos(genre_index):
         # Here we use only poster for simplicity's sake.
         # In a real-life plugin you may need to set multiple image types.
         list_item.setArt(
-            {"poster": f"{url}{item.find('img')['data-src']}"}
+            {"poster": f"{main_url}{item.find('img')['data-src']}"}
         )
         # Set additional info for the list item via InfoTag.
         # 'mediatype' is needed for skin to display info for this ListItem correctly.
