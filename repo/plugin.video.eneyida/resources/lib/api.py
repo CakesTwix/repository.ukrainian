@@ -6,7 +6,7 @@ import json
 import sys
 from urllib.parse import unquote
 
-from resources.lib.constant import title_type
+from resources.lib.constant import main_url, title_type
 from resources.lib.utils import get_url, get_videos
 
 # Get a plugin handle as an integer number.
@@ -27,7 +27,7 @@ def list_videos(genre_index):
 
         if keyb.isConfirmed() and len(keyb.getText()) > 0:
             r = requests.post(
-                "https://eneyida.tv/index.php?do=search",
+                f"{url}/index.php?do=search",
                 data={
                     "do": "search",
                     "subaction": "search",
@@ -55,7 +55,7 @@ def list_videos(genre_index):
         # Here we use only poster for simplicity's sake.
         # In a real-life plugin you may need to set multiple image types.
         list_item.setArt(
-            {"poster": f"https://eneyida.tv{item.find('img')['data-src']}"}
+            {"poster": f"{url}{item.find('img')['data-src']}"}
         )
         # Set additional info for the list item via InfoTag.
         # 'mediatype' is needed for skin to display info for this ListItem correctly.
