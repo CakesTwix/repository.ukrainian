@@ -6,7 +6,7 @@ import json
 import sys
 from urllib.parse import unquote
 
-from resources.lib.constant import title_type
+from resources.lib.constant import main_url,title_type
 from resources.lib.utils import get_url, get_videos
 
 # Get a plugin handle as an integer number.
