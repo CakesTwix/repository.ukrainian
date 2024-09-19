@@ -6,7 +6,7 @@ import json
 import sys
 from urllib.parse import unquote
 
-from resources.lib.constant import main_url, title_type
+from resources.lib.constant import main_url, title_type, requests_no_ssl_verify
 from resources.lib.utils import get_url, get_videos
 
 # Get a plugin handle as an integer number.
@@ -35,7 +35,7 @@ def list_videos(genre_index):
                 },
             )
     else:
-        r = requests.get(genre_info["url"])
+        r = requests_no_ssl_verify(genre_info["url"])
 
     # Set plugin category. It is displayed in some skins as the name
     # of the current section.
@@ -126,7 +126,7 @@ def list_dubs(title_url: str):
     :type title_url: str
     """
 
-    r = requests.get(title_url)
+    r = requests_no_ssl_verify(title_url)
     soup = BeautifulSoup(r.content, "html.parser")
 
     # Set plugin category. It is displayed in some skins as the name
@@ -138,7 +138,7 @@ def list_dubs(title_url: str):
     list_item = xbmcgui.ListItem()
     # Get the list of videos in the category.
 
-    plr = requests.get(soup.find("div", class_="video_box").find("iframe")["src"])
+    plr = requests_no_ssl_verify(soup.find("div", class_="video_box").find("iframe")["src"])
     plr_soup = BeautifulSoup(plr.content, "html.parser")
     # Parse as Movie
     if "/vod/" in soup.find("div", class_="video_box").find("iframe")["src"]:
@@ -188,12 +188,12 @@ def list_dubs(title_url: str):
 
 
 def open_seasons(seasons_folder):
-    seasons = json.loads(unquote(seasons_folder).replace("'", '"'))
+    seasons = json.loads(seasons_folder.replace("'", '"'))
     if len(seasons) == 1:
         open_episodes(seasons[0]["folder"])
         return
 
-    for season in json.loads(unquote(seasons_folder).replace("'", '"')):
+    for season in seasons:
         list_season = xbmcgui.ListItem(label=season["title"])
         xbmcplugin.setContent(HANDLE, "seasons")
         xbmcplugin.setPluginCategory(HANDLE, "Сезони")
@@ -209,9 +209,12 @@ def open_seasons(seasons_folder):
 
 
 def open_episodes(episodes_folder):
-    for episode in json.loads(unquote(episodes_folder).replace("'", '"')):
+    if type(episodes_folder) == type(""):
+        episodes_folder = json.loads(episodes_folder.replace("'", '"'))
+    for episode in episodes_folder:
         list_episode = xbmcgui.ListItem(label=episode["title"])
         list_episode.setArt({"poster": episode["poster"]})
+        list_episode.setProperty("IsPlayable", "true")
         xbmcplugin.setContent(HANDLE, "episodes")
         xbmcplugin.setPluginCategory(HANDLE, "Епизоди")
         xbmcplugin.addDirectoryItem(

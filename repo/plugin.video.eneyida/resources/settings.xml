@@ -1,0 +1,6 @@
+<settings>
+    <category label="Базові налаштування">
+        <setting id="main_url" type="text" label="Адреса ресурсу" default="5.61.50.35"/>
+        <setting id="mirror" type="text" label="Дзеркало ресурсу" default="5.61.50.35" />
+    </category>
+</settings>
